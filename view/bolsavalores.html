@@ -1,0 +1,106 @@
+<?php
+    require_once("./constant.php");
+    require_once(__ROOT__DB__."config.php");
+    require_once(__ROOT__MODEL__."m_mark.php");
+    
+    echo "config";
+?>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../js/easyui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="../js/easyui/themes/icon.css">
+		<link rel="stylesheet" type="text/css" href="../js/easyui/themes/color.css">
+		<link rel="stylesheet" type="text/css" href="../js/easyui/demo/demo.css">
+		<script type="text/javascript" src="../js/easyui/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
+		
+		<script type="text/javascript" src="../js/controller.js"></script>
+                <script type="text/javascript">
+                        var v_precioCentenario = 0.0;
+                        var v_precioOnza = 0.0;
+                        var v_precioDollar = 0.0;
+                        
+			$( document ).ready(
+				function() {
+                                        $('#dlgBolsa').dialog('open').dialog('setTitle','Inicio de sesion');
+					$.getJSON( "../controller/c_bolsa.php?action=cotization", function( data ) {                                           
+					  $.each( data, function( key, val ) {
+                                              try{                                              
+                                                switch(parseInt(val.TipoMoneda))
+                                                {
+                                                    case 1:                                                      
+                                                        v_precioCentenario = val.PrecioVenta;                                                        
+                                                        break;
+                                                    case 2:
+                                                        v_precioOnza = val.PrecioVenta;                                                        
+                                                        break;
+                                                    case 3:
+                                                        v_precioDollar = val.PrecioVenta;                                                        
+                                                        break;
+                                                }
+                                              }catch(Err){alert(Err);}
+					  });
+                                          
+                                         $('#frmBolsa').form('load',{
+                                                precioCentenario: v_precioCentenario,
+                                                precioOnza: v_precioOnza,
+                                                precioDollar: v_precioDollar
+                                          });
+                                            
+					});
+				}
+                              
+		);
+		</script>               
+    </head>
+	<body>
+            <!-- FORM -->
+            <div id="dlgBolsa" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px" closed="false" buttons="#dlg-buttons">
+                <div class="ftitle">Valores</div>
+                <form id="frmBolsa" method="post" novalidate clear="none" reset="none">
+                    <div class="fitem">
+                        <label>Dollar</label>
+                        <input name="precioDollar" value="" id="precioDollar" class="easyui-textbox" required="true">
+                    </div>
+                    <div class="fitem">
+                        <label>Centenario</label>
+                        <input name="precioCentenario" value="" id="precioCentenario" class="easyui-textbox" required="true">
+                    </div>
+                    <div class="fitem">
+                        <label>onzaPlata</label>
+                        <input name="precioOnza" value="" id="precioOnza" class="easyui-textbox" required="true">
+                    </div>
+                </form>
+            </div>
+            <div id="dlg-buttons">
+                    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="SaveBolsaValores('../controller/c_bolsa.php?action=update');" style="width:90px">Guardar</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close');GotoLogin();" style="width:90px">Cancelar</a>
+            </div>
+            
+             
+		<style type="text/css">
+			#fm{
+				margin:0;
+				padding:10px 30px;
+			}
+			.ftitle{
+				font-size:14px;
+				font-weight:bold;
+				padding:5px 0;
+				margin-bottom:10px;
+				border-bottom:1px solid #ccc;
+			}
+			.fitem{
+				margin-bottom:5px;
+			}
+			.fitem label{
+				display:inline-block;
+				width:80px;
+			}
+			.fitem input{
+				width:160px;
+			}
+		</style>        
+             
+	</body>
+</html>

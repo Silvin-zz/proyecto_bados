@@ -1,0 +1,91 @@
+<?php
+	require_once("../constant.php");
+?>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../js/easyui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="../js/easyui/themes/icon.css">
+		<link rel="stylesheet" type="text/css" href="../js/easyui/themes/color.css">
+		<link rel="stylesheet" type="text/css" href="../js/easyui/demo/demo.css">
+		<script type="text/javascript" src="../js/easyui/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
+		
+		<script type="text/javascript" src="../js/controller.js"></script>                
+    </head>
+	<body>
+			<p>
+				Por el momento ingresará cualquier usuario aun y no sea valido.<br>
+				Por cuestiones de prueba se implementó esto, pues actualmente el usuario y password se encuentran encriptados en la base de datos,<br>
+				el detalle de esto es que no está especificado cual algoritmo de encriptación se ocupó y si es necesario una llave, cual e esta.<br>
+				
+				<br>Perderíamos mucho tiempo en tratar de adivinar y no creo que sea muy sano, por cuestiones de compatibilidad y para que se conserve la misma bd,
+				se está reutilizando la misma, por lo que no tenemos otra alternativa que generar los los usuarios y password.<br>
+				
+				<br>Los datos se quedan, solo hay que actualizar dichos datos. Se me ocurre lo siguiente.
+				
+				* Proporcinenme los nombres de los usuarios que existen ejemplo:<br>
+					Moises Crus, Usuario: mcruz<br>
+					Tal y como inician sesión. El password lo cambiarán o en su defecto (es decisión del usuario), lo reingresarán la primera vez que la aplicación detecte<br>
+					que se ha loggueado por primera vez, así o bien, lo cambian o conservan el mismo.<br>
+					
+			</p>
+			<br>
+            <!-- FORM -->
+            <div id="dlgBolsa" class="easyui-dialog" style="width:420px;height:320px;padding:10px 20px" title="" closed="false" buttons="#dlg-buttons">
+                <div class="ftitle">Iniciando Sesion</div>
+                <form id="frmLogin" method="post" novalidate clear="none" reset="none">
+                    <div class="fitem">
+                        <label>Usuario</label>
+                        <input name="Usuario" value="" id="Usuario" class="easyui-textbox" required="true" style="width:100%;height:40px;padding:12px" data-options="prompt:'Usuario',iconCls:'icon-man',iconWidth:38">
+                    </div>
+                    <div class="fitem">
+                        <label>Contrase&ntilde;a</label>
+                        <input name="Password" type="password" value="" id="Password" class="easyui-textbox" required="true" style="width:100%;height:40px;padding:12px" data-options="prompt:'Password',iconCls:'icon-lock',iconWidth:38">
+                    </div>
+                    <div class="fitem">
+                        <label>Turno</label>
+                        <input class="easyui-combobox" 
+								required="true"
+                                name="Turno"
+                                data-options="
+                                        url:'../controller/c_turno.php?action=combo',
+                                        method:'get',
+                                        valueField:'Turno',
+                                        textField:'Nombre',
+                                        panelHeight:'auto' " style="width:100%;height:40px;padding:12px">
+                    </div>
+                </form>
+				<div><br>                    
+                    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="Login('../controller/c_user.php?action=login');" style="padding:5px 0px;width:100%;">
+						<span style="font-size:14px;">Entrar</span>
+					</a>
+				</div>
+            </div>            
+            
+             
+		<style type="text/css">
+			#fm{
+				margin:0;
+				padding:10px 30px;
+			}
+			.ftitle{
+				font-size:14px;
+				font-weight:bold;
+				padding:5px 0;
+				margin-bottom:10px;
+				border-bottom:1px solid #ccc;
+			}
+			.fitem{
+				margin-bottom:5px;
+			}
+			.fitem label{
+				display:inline-block;
+				width:80px;
+			}
+			.fitem input{
+				width:160px;
+			}
+		</style>        
+             
+	</body>
+</html>

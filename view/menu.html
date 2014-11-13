@@ -1,0 +1,33 @@
+<div style="background:#fafafa;padding:15px;width:90%;border:2px solid #ccc">
+    <a href="#" class="easyui-menubutton" menu="#mm1" iconCls="">Catalogos</a>
+    <a href="#" class="easyui-menubutton" menu="#mnuRep" iconCls="icon-report">Reporte</a>
+    <a href="#" class="easyui-menubutton" menu="#mm3" iconCls="">Acerca De</a>
+    <a href="#" class="easyui-menubutton" menu="#mm4" iconCls="icon-lock" onClick="GotoPage('./view/login.html');">Salir</a>
+</div>
+<div id="mm1" style="width:180px;">
+
+    <div onClick="GotoPage('./adminTipoEmpleado.php');">Tipo Empleado</div>
+    <div onClick="GotoPage('./adminEmployee.php');">Empleado</div>            
+    <div class="menu-sep"></div>   
+    <div iconCls=""  onClick="GotoPage('./adminProveedor.php');">Proveedores</div>
+    <div class="menu-sep"></div>
+    <div onClick="GotoPage('./adminProfile.php');">Perfiles</div>
+    <div onClick="GotoPage('./adminUser.php');">Usuarios</div>         
+    <div class="menu-sep"></div>
+    <div onClick="GotoPage('./adminPriceList.php');">Precio de Lista</div>
+    <div onClick="GotoPage('./adminMark.php');">Marcas</div>   
+    <div class="menu-sep"></div>
+    <div onClick="GotoPage('./adminCustomer.php');">Clientes</div>
+    <div onClick="GotoPage('./adminService.php');">Servicios</div>
+</div>
+<div id="mm3" style="width:100px;">
+    
+</div>
+
+<div id="mnuRep" style="width:100px;">
+    <div onClick="GotoPageReport('./reportClient.php', 'dlgClientes', 'Reporte de Clientes');">Clientes</div>
+    <div onClick="GotoPageReport('./reportEmployee.php', 'dlgEmpleados', 'Reporte de Empleados');">Empleados</div>
+</div>
+
+<div id="mm4" style="width:100px;">
+</div>
